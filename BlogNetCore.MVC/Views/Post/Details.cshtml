@@ -1,0 +1,62 @@
+﻿@model BlogNetCore.MVC.Models.PostDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<h1 class="mt-4">@Model.Post.Title</h1>
+
+<p class="lead mb-0">
+    by
+    @if (Model.Post.CreatedBy != null)
+    {
+        <a href="#">@Model.Post.CreatedBy</a>
+    }
+    else
+    {
+        <a>Anonymous</a>
+    }
+</p>
+<p>Posted on @Model.Post.CreatedDate.Value.ToString("dd/MM/yyyy - hh:mm tt")</p>
+<div><span class="badge badge-dark">@Model.Post.CategoryName</span></div>
+<hr>
+<div class="row justify-content-center align-self-center">
+    <img class="img-fluid rounded align-self-center" src="@Url.Content(Model.Post.ImagePath)" alt="Cover Image">
+</div>
+
+<!-- Post Content -->
+<div class="post-content mt-4">
+    @Html.Raw(Model.Post.Content)
+</div>
+<hr />
+
+<div id="d-comment-section">
+    @await Component.InvokeAsync("CommentSection", new { postId = Model.Post.Id })
+</div>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header text-white bg-dark">Leave a Comment:</h5>
+        <div class="card-body">
+            <form id="d-add-comment-form" asp-controller="Comment" asp-action="AddComment" asp-route-postId="@Model.Post.Id" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Comment.Content" class="control-label"></label>
+                    <textarea asp-for="Comment.Content" class="form-control"></textarea>
+                    <span asp-validation-for="Comment.Content" class="text-danger"></span>
+                </div>
+                <input asp-for="Comment.UserId" type="hidden" value="@UserManager.GetUserId(User)"/>
+                <input asp-for="Comment.PostId" type="hidden" value="@Model.Post.Id"/>
+
+                <input type="submit" class="btn btn-primary" value="Post comment">
+            </form>
+        </div>
+    </div>
+}
+
+<div class="mb-5"></div>

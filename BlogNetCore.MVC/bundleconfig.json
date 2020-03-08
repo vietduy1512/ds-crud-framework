@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/js/Scripts.min.js",
+    "inputFiles": [
+      "wwwroot/js/Comment/AddComment.js",
+      "wwwroot/js/Manage/Manage.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

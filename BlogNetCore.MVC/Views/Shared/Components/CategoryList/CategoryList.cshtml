@@ -1,0 +1,11 @@
+﻿@model IEnumerable<SEP.Framework.DAO.DTO.CategoryDto>
+
+<ul class="nav navbar-nav">
+    @foreach (var item in Model)
+    {
+        <li class="mt-2 mr-4">
+            <a class="btn btn-block btn-outline-dark" href="@Url.Action("PostListByCategory", "Category", new { categoryName=item.Name, categoryId=item.Id })">@item.Name</a>
+        </li>
+    }
+</ul>
+

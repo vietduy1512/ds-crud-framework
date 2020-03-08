@@ -1,0 +1,10 @@
+﻿@model BlogNetCore.MVC.Models.PostIndexViewModel
+
+@{
+    ViewBag.Title = "Post List";
+}
+
+<div class="card text-white bg-dark mt-3 mb-2">
+    <h5 class="card-header">Latest Post</h5>
+</div>
+<partial name="_PostList" for="PostList" />

@@ -1,0 +1,21 @@
+﻿<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse mt-4">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a asp-controller="Post" asp-action="Index"><i class="menu-icon fa fa-dashboard"></i>Dashboard</a>
+                </li>
+                <h3 class="menu-title">Manage</h3><!-- /.menu-title -->
+                <li>
+                    <a asp-controller="Manage" asp-action="PostManage"><i class="menu-icon ti-book"></i>Post</a>
+                </li>
+                <li>
+                    <a asp-controller="Manage" asp-action="CategoryManage"><i class="menu-icon ti-agenda"></i>Category</a>
+                </li>
+                <li>
+                    <a asp-controller="Manage" asp-action="CommentManage"><i class="menu-icon ti-comment"></i>Comment</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>

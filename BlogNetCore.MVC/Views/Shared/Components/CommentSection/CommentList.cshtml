@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SEP.Framework.DAO.DTO.CommentDto>
+
+<div class="card mt-4">
+    <h5 class="card-header text-white bg-dark">Comments</h5>
+</div>
+
+@if (Model.Count() == 0)
+{
+    <div class="card my-0">
+        <div class="card-body">There are no comments yet</div>
+    </div>
+}
+else
+{
+    @foreach (var comment in Model)
+    {
+        <!-- Single Comment -->
+        <div class=" media pt-2 ml-0">
+            <div class="media-body">
+                <div class="card my-0">
+                    <h5 class="card-header">
+                        @if (comment.CreatedBy != null)
+                        {
+                            <a href="#">@comment.CreatedBy</a>
+                        }
+                    </h5>
+                    <div class="card-body">@comment.Content</div>
+                </div>
+            </div>
+        </div>
+    }
+}

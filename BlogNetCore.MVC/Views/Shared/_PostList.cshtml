@@ -1,0 +1,49 @@
+﻿@model PagingList<SEP.Framework.DAO.DTO.PostDto>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+
+<div id="lvd-post">
+    @foreach (var post in Model)
+    {
+        <!-- Blog Post -->
+        <div class="card blog-post-black blog-post-no-hover mb-3">
+            <a asp-controller="Post" asp-action="Details" asp-route-postId="@post.Id" asp-route-postSlug="@post.Slug">
+                <div class="row">
+                    <div class="col-md-5">
+                        <!-- Post Thumbnail -->
+                        @if (!String.IsNullOrEmpty(post.ImagePath))
+                        {
+                            <img class="card-img-top" src="@Url.Content(post.ImagePath)" alt="Card image cap">
+                        }
+                    </div>
+                    <div class="col-md-7">
+                        <!-- Post Content -->
+                        <div class="card-body">
+                            <h5 class="card-title">@post.Title</h5>
+                            <p class="card-text"><small>@post.Description</small></p>
+                        </div>
+                    </div>
+                    <div class="category-name"><span class="badge badge-dark">@post.CategoryName</span></div>
+                </div>
+            </a>
+            <!-- Post Meta -->
+            <div class="card-footer text-muted">
+                Posted on @post.CreatedDate.Value.ToString("dd/MM/yyyy - hh:mm tt") by
+                @if (post.CreatedBy != null)
+                {
+                    <a href="#">@post.CreatedBy</a>
+                }
+                else
+                {
+                    <a>Anonymous</a>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- Pagination -->
+    <nav aria-label="Paging" data-lvd-target="#lvd-post">
+        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+    </nav>
+</div>

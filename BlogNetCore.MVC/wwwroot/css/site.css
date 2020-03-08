@@ -1,0 +1,78 @@
+
+body {
+    padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+
+
+.blog-post-black h1,
+.blog-post-black h2,
+.blog-post-black h3,
+.blog-post-black h4,
+.blog-post-black h5,
+.blog-post-black h6,
+.blog-post-black a,
+.blog-post-black p {
+    color: black !important;
+}
+
+.blog-post-no-hover a:hover {
+    opacity: 0.5;
+    text-decoration: none !important;
+}
+
+.navbar-user-image {
+    max-width: 15px;
+}
+
+.user-area .dropdown-toggle:after {
+    display: none;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.user-area .user-avatar {
+    float: right;
+    margin-top: 4px;
+    width: 32px;
+}
+
+.user-area .user-menu {
+    background: #fff;
+    border: none;
+    font-family: 'Open Sans';
+    left: inherit !important;
+    right: 0;
+    top: 47px !important;
+    margin: 0;
+    max-width: 150px;
+    padding: 5px 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    min-width: 150px;
+}
+
+.category-name {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+}

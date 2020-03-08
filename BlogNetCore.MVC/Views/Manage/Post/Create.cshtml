@@ -1,0 +1,58 @@
+﻿@model BlogNetCore.MVC.Models.PostCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Post";
+}
+@inject UserManager<User> UserManager
+
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+    <form asp-action="CreatePost" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Post.Title" class="control-label"></label>
+            <input asp-for="Post.Title" class="form-control" />
+            <span asp-validation-for="Post.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Post.Description" class="control-label"></label>
+            <textarea asp-for="Post.Description" class="form-control"></textarea>
+            <span asp-validation-for="Post.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Post.CategoryName">Category</label>
+            <select asp-for="Post.CategoryId" class="form-control">
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Post.ImagePath" asp-label-text class="control-label">Thumbnail</label>
+            <input type="file" name="uploaded_image" id="uploaded_image" class="form-control" />
+            <span asp-validation-for="Post.ImagePath" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Post.Content" class="control-label"></label>
+            <textarea asp-for="Post.Content" class="form-control" id="txtCKEditor"></textarea>
+            <span asp-validation-for="Post.Content" class="text-danger"></span>
+        </div>
+        <input asp-for="Post.AuthorId" type="hidden" value="@UserManager.GetUserId(User)" />
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        var editor = CKEDITOR.replace("txtCKEditor", {
+            customConfig: 'config.js',
+        });
+    </script>
+}
